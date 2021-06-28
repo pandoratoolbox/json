@@ -1306,8 +1306,9 @@ func typeFields(t reflect.Type) structFields {
 					}
 					//test
 					// name = strings.ToLower(name)
+					fmt.Print(name)
 					field := field{
-						name:      "lol",
+						name:      name,
 						tag:       tagged,
 						index:     index,
 						typ:       ft,
