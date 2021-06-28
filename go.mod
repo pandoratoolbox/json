@@ -1,3 +1,3 @@
-module github.com/clarketm/json
+module github.com/pandoratoolbox/json
 
 go 1.15
