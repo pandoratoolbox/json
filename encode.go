@@ -759,6 +759,7 @@ FieldLoop:
 		}
 
 		if f.omitEmpty && isEmptyValue(fv) {
+			// if isEmptyValue(fv) {
 			continue
 		}
 		e.WriteByte(next)
@@ -1303,6 +1304,8 @@ func typeFields(t reflect.Type) structFields {
 					if name == "" {
 						name = sf.Name
 					}
+					//test
+					name = strings.ToLower(name)
 					field := field{
 						name:      name,
 						tag:       tagged,
