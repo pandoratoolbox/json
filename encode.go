@@ -740,6 +740,23 @@ type structFields struct {
 	nameIndex map[string]int
 }
 
+func snakeWordBarrier(t string) string {
+	rs := []rune(t)
+
+	new := []rune{}
+
+	for i, r := range rs {
+		if unicode.IsLower(rs[i-1]) && unicode.IsUpper(r) {
+			new = append(new, rune('_'))
+			new = append(new, r)
+			continue
+		}
+		new = append(new, r)
+	}
+
+	return string(new)
+}
+
 func (se structEncoder) encode(e *encodeState, v reflect.Value, opts encOpts) {
 	next := byte('{')
 FieldLoop:
@@ -765,9 +782,9 @@ FieldLoop:
 		e.WriteByte(next)
 		next = ','
 		if opts.escapeHTML {
-			e.WriteString(strings.ToLower(f.nameEscHTML))
+			e.WriteString(strings.ToLower(snakeWordBarrier(f.nameEscHTML)))
 		} else {
-			e.WriteString(strings.ToLower(f.nameNonEsc))
+			e.WriteString(strings.ToLower(snakeWordBarrier(f.nameNonEsc)))
 		}
 		opts.quoted = f.quoted
 		f.encoder(e, fv, opts)
