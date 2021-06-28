@@ -758,18 +758,16 @@ FieldLoop:
 			fv = fv.Field(i)
 		}
 
-		fmt.Println("check")
-
-		if f.omitEmpty && isEmptyValue(fv) {
-			// if isEmptyValue(fv) {
+		// if f.omitEmpty && isEmptyValue(fv) {
+		if isEmptyValue(fv) {
 			continue
 		}
 		e.WriteByte(next)
 		next = ','
 		if opts.escapeHTML {
-			e.WriteString(f.nameEscHTML)
+			e.WriteString(strings.ToLower(f.nameEscHTML))
 		} else {
-			e.WriteString(f.nameNonEsc)
+			e.WriteString(strings.ToLower(f.nameNonEsc))
 		}
 		opts.quoted = f.quoted
 		f.encoder(e, fv, opts)
