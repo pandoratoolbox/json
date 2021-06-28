@@ -746,11 +746,14 @@ func snakeWordBarrier(t string) string {
 	new := []rune{}
 
 	for i, r := range rs {
-		if unicode.IsLower(rs[i-1]) && unicode.IsUpper(r) {
-			new = append(new, rune('_'))
-			new = append(new, r)
-			continue
+		if i > 0 {
+			if unicode.IsLower(rs[i-1]) && unicode.IsUpper(r) {
+				new = append(new, rune('_'))
+				new = append(new, r)
+				continue
+			}
 		}
+
 		new = append(new, r)
 	}
 
