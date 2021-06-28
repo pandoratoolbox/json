@@ -740,46 +740,46 @@ type structFields struct {
 	nameIndex map[string]int
 }
 
-func ToSnakeCase(s string) string {
-	var res = make([]rune, 0, len(s))
-	var p = '_'
-	for i, r := range s {
-		if !unicode.IsLetter(r) && !unicode.IsDigit(r) {
-			res = append(res, '_')
-		} else if unicode.IsUpper(r) && i > 0 {
-			if unicode.IsLetter(p) && !unicode.IsUpper(p) || unicode.IsDigit(p) {
-				res = append(res, '_', unicode.ToLower(r))
-			} else {
-				res = append(res, unicode.ToLower(r))
-			}
-		} else {
-			res = append(res, unicode.ToLower(r))
-		}
-
-		p = r
-	}
-	return string(res)
-}
-
-// func snakeWordBarrier(t string) string {
-// 	rs := []rune(t)
-
-// 	new := []rune{}
-
-// 	for i, r := range rs {
-// 		if i > 0 {
-// 			if unicode.IsLower(rs[i-1]) && unicode.IsUpper(r) {
-// 				new = append(new, rune('_'))
-// 				new = append(new, r)
-// 				continue
+// func ToSnakeCase(s string) string {
+// 	var res = make([]rune, 0, len(s))
+// 	var p = '_'
+// 	for i, r := range s {
+// 		if !unicode.IsLetter(r) && !unicode.IsDigit(r) {
+// 			res = append(res, '_')
+// 		} else if unicode.IsUpper(r) && i > 0 {
+// 			if unicode.IsLetter(p) && !unicode.IsUpper(p) || unicode.IsDigit(p) {
+// 				res = append(res, '_', unicode.ToLower(r))
+// 			} else {
+// 				res = append(res, unicode.ToLower(r))
 // 			}
+// 		} else {
+// 			res = append(res, unicode.ToLower(r))
 // 		}
 
-// 		new = append(new, r)
+// 		p = r
 // 	}
-
-// 	return string(new)
+// 	return string(res)
 // }
+
+func ToSnakeCase(t string) string {
+	rs := []rune(t)
+
+	new := []rune{}
+
+	for i, r := range rs {
+		if i > 0 {
+			if unicode.IsLower(rs[i-1]) && unicode.IsUpper(r) {
+				new = append(new, rune('_'))
+				new = append(new, unicode.ToLower(r))
+				continue
+			}
+		}
+
+		new = append(new, unicode.ToLower(r))
+	}
+
+	return string(new)
+}
 
 func (se structEncoder) encode(e *encodeState, v reflect.Value, opts encOpts) {
 	next := byte('{')
