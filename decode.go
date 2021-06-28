@@ -93,6 +93,39 @@ import (
 // Instead, they are replaced by the Unicode replacement
 // character U+FFFD.
 //
+
+func ToUpperCamelCase(s string) string {
+	rs := []rune(s)
+	new := []rune{}
+	next_upper := true
+
+	for _, r := range rs {
+		if next_upper {
+			new = append(new, unicode.ToUpper(r))
+			next_upper = false
+			continue
+		}
+		if unicode.IsPunct(r) {
+			next_upper = true
+			continue
+		}
+
+		new = append(new, r)
+	}
+
+	return string(new)
+
+}
+
+// func UnmarshalSnake(data []byte, v interface{}) error {
+// 	dmap := make(map[string]RawMessage)
+// 	err := Unmarshal(data, &dmap)
+// 	if err != nil {
+// 		return err
+// 	}
+
+// }
+
 func Unmarshal(data []byte, v interface{}) error {
 	// Check for well-formedness.
 	// Avoids filling out half a data structure
@@ -678,7 +711,9 @@ func (d *decodeState) object(v reflect.Value) error {
 		if !ok {
 			panic(phasePanicMsg)
 		}
-
+		//test
+		key = []byte(ToUpperCamelCase(string(key)))
+		fmt.Println(string(key))
 		// Figure out field corresponding to key.
 		var subv reflect.Value
 		destring := false // whether the value is wrapped in a string to be decoded first
