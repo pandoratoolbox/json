@@ -101,9 +101,11 @@ func ToUpperCamelCase(s string) string {
 
 	for _, r := range rs {
 		if next_upper {
-			new = append(new, unicode.ToUpper(r))
-			next_upper = false
-			continue
+			if unicode.IsLetter(r) {
+				new = append(new, unicode.ToUpper(r))
+				next_upper = false
+				continue
+			}
 		}
 		if unicode.IsPunct(r) {
 			next_upper = true

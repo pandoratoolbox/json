@@ -14,7 +14,6 @@ import (
 	"bytes"
 	"compress/gzip"
 	"fmt"
-	"internal/testenv"
 	"io"
 	"os"
 	"reflect"

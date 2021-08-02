@@ -768,7 +768,7 @@ func ToSnakeCase(t string) string {
 
 	for i, r := range rs {
 		if i > 0 {
-			if unicode.IsLower(rs[i-1]) && unicode.IsUpper(r) {
+			if (unicode.IsLower(rs[i-1]) && (unicode.IsUpper(r) || unicode.IsDigit(r))) || (unicode.IsDigit(rs[i-1]) && unicode.IsUpper(r)) {
 				new = append(new, rune('_'))
 				new = append(new, unicode.ToLower(r))
 				continue
