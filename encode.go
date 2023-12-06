@@ -359,7 +359,7 @@ func isEmptyValue(v reflect.Value) bool {
 			if !v.IsNil() {
 				return false
 			} else {
-				return isEmptyValueOrZero(v)
+				return isEmptyValueOrZero(v.Elem())
 			}
 		case reflect.Struct:
 			vt := v.Type()
@@ -391,7 +391,7 @@ func isEmptyValue(v reflect.Value) bool {
 			if !v.IsNil() {
 				return false
 			} else {
-				return isEmptyValueOrZero(v)
+				return isEmptyValueOrZero(v.Elem())
 			}
 		case reflect.Struct:
 			vt := v.Type()
@@ -428,7 +428,7 @@ func isEmptyValueOrZero(v reflect.Value) bool {
 			if !v.IsNil() {
 				return false
 			} else {
-				return isEmptyValue(v)
+				return isEmptyValue(v.Elem())
 			}
 		case reflect.Interface:
 			return v.IsNil()
@@ -462,7 +462,7 @@ func isEmptyValueOrZero(v reflect.Value) bool {
 			if !v.IsNil() {
 				return false
 			} else {
-				return isEmptyValue(v)
+				return isEmptyValue(v.Elem())
 			}
 		case reflect.Struct:
 			vt := v.Type()
