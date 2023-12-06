@@ -1346,7 +1346,7 @@ func typeFields(t reflect.Type) structFields {
 					}
 					ot := opts.Contains("omitempty")
 					if name == "id" || name == "Id" {
-						ot = true
+						ot = false
 					}
 					field := field{
 						name:      name,
