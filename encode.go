@@ -422,12 +422,14 @@ func isEmptyValueOrZero(v reflect.Value) bool {
 			return v.Uint() == 0
 		case reflect.Float32, reflect.Float64:
 			return v.Float() == 0
-		case reflect.Interface, reflect.Ptr:
+		case reflect.Ptr:
 			if !v.IsNil() {
 				return false
 			} else {
 				return isEmptyValue(v)
 			}
+		case reflect.Interface:
+			return v.IsNil()
 		case reflect.Struct:
 			vt := v.Type()
 			for i := v.NumField() - 1; i >= 0; i-- {
