@@ -797,9 +797,10 @@ FieldLoop:
 			}
 			fv = fv.Field(i)
 		}
+		
 
 		// if f.omitEmpty && isEmptyValue(fv) {
-		if isEmptyValue(fv) {
+		if isEmptyValue(fv) || f.name == "Id" || f.name == "id" {
 			continue
 		}
 		e.WriteByte(next)
@@ -1346,7 +1347,7 @@ func typeFields(t reflect.Type) structFields {
 					}
 					ot := opts.Contains("omitempty")
 					if name == "id" || name == "Id" {
-						ot = false
+						ot = true
 					}
 					field := field{
 						name:      name,
