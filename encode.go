@@ -797,10 +797,9 @@ FieldLoop:
 			}
 			fv = fv.Field(i)
 		}
-		
 
 		// if f.omitEmpty && isEmptyValue(fv) {
-		if isEmptyValue(fv) || f.name == "Id" || f.name == "id" {
+		if isEmptyValue(fv) || f.name == "Id" && fv.Int() == 0 || f.name == "id" && fv.Int() == 0 {
 			continue
 		}
 		e.WriteByte(next)
