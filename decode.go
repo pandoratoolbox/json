@@ -721,6 +721,7 @@ func (d *decodeState) object(v reflect.Value) error {
 		destring := false // whether the value is wrapped in a string to be decoded first
 
 		if v.Kind() == reflect.Map {
+			key = []byte(string(key))
 			elemType := t.Elem()
 			if !mapElem.IsValid() {
 				mapElem = reflect.New(elemType).Elem()
