@@ -714,14 +714,14 @@ func (d *decodeState) object(v reflect.Value) error {
 			panic(phasePanicMsg)
 		}
 		//test ToUpperCamelCase struct key when unmarshalling
-		key = []byte(ToUpperCamelCase(string(key)))
+		// key = []byte(ToUpperCamelCase(string(key)))
 		//fmt.Println(string(key)) - WORKING
 		// Figure out field corresponding to key.
 		var subv reflect.Value
 		destring := false // whether the value is wrapped in a string to be decoded first
 
 		if v.Kind() == reflect.Map {
-			key = []byte(string(key))
+			// key = []byte(string(key))
 			elemType := t.Elem()
 			if !mapElem.IsValid() {
 				mapElem = reflect.New(elemType).Elem()
