@@ -714,7 +714,7 @@ func (d *decodeState) object(v reflect.Value) error {
 			panic(phasePanicMsg)
 		}
 		//test ToUpperCamelCase struct key when unmarshalling
-		// key = []byte(ToUpperCamelCase(string(key)))
+
 		//fmt.Println(string(key)) - WORKING
 		// Figure out field corresponding to key.
 		var subv reflect.Value
@@ -730,6 +730,7 @@ func (d *decodeState) object(v reflect.Value) error {
 			}
 			subv = mapElem
 		} else {
+			key = []byte(ToUpperCamelCase(string(key)))
 			var f *field
 			if i, ok := fields.nameIndex[string(key)]; ok {
 				// Found an exact name match.
