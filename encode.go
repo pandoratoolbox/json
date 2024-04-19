@@ -337,7 +337,7 @@ func (e *encodeState) error(err error) {
 	panic(jsonError{err})
 }
 
-var ZeroIsNull bool = true
+var ZeroIsNull bool = false
 
 func isEmptyValue(v reflect.Value) bool {
 	switch ZeroIsNull {
