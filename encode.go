@@ -382,16 +382,16 @@ func isEmptyValue(v reflect.Value) bool {
 		case reflect.Interface, reflect.Ptr:
 			return v.IsNil()
 		case reflect.Struct:
-			vt := v.Type()
-			for i := v.NumField() - 1; i >= 0; i-- {
-				if vt.Field(i).PkgPath != "" {
-					continue // Private field
-				}
-				if !isEmptyValueOrZero(v.Field(i)) {
-					return false
-				}
-			}
-			return true
+			// vt := v.Type()
+			// for i := v.NumField() - 1; i >= 0; i-- {
+			// if vt.Field(i).PkgPath != "" {
+			// continue // Private field
+			// }
+			// if !isEmptyValueOrZero(v.Field(i)) {
+			// 	return false
+			// }
+			// }
+			// return true
 		}
 	}
 
